@@ -23,8 +23,24 @@
             font-size: 2em;
         }
         header p {
-            margin: 10px 0 0;
+            margin: 10px 0 20px;
             font-size: 1em;
+        }
+        .button-container {
+            margin: 20px 0;
+        }
+        .button-container button {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+        }
+        .button-container button:hover {
+            background-color: #444;
         }
         main {
             max-width: 800px;
@@ -44,14 +60,29 @@
         article p {
             margin: 0;
         }
+        section {
+            margin: 40px 0;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Welcome to My Website</h1>
         <p>A space for sharing thoughts and ideas in elegant simplicity.</p>
+        <div class="button-container">
+            <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">About Me</button>
+            <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})">Projects</button>
+        </div>
     </header>
     <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>This is where you can write a brief introduction about yourself. Share your background, interests, or anything you'd like visitors to know!</p>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <p>Showcase your projects here. Include links, descriptions, or anything you'd like to highlight about your work.</p>
+        </section>
         <article>
             <h2>My First Post</h2>
             <p>This is where the content of your first post will go. Write something meaningful!</p>
