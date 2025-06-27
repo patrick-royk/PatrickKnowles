@@ -1,365 +1,345 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick R. Knowles - CV // Chicago Style</title>
+    <title>Patrick R. Knowles - Personal Website</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FFFFFF; /* White background */
-            color: #004d40; /* Dark Green for general text */
-            padding: 1.5rem;
-        }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            background-color: #FFFFFF; /* White background for main content */
-            padding: 2.5rem;
-            border-radius: 0; /* Sharp corners */
-            border: 1px solid #004d40; /* Dark Green border */
-            box-shadow: 4px 4px 0px #00332e; /* Darker green shadow */
-        }
-        h1, h2, h3 {
-            color: #00695c; /* Slightly lighter, but still dark, green accent for headings */
-            font-weight: 700; /* Adjusted for better Chicago style readability */
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 3px solid #00695c; /* Dark Green accent bottom border */
-            padding-bottom: 0.75rem;
-        }
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 2.5rem;
-            margin-bottom: 1.2rem;
-            border-bottom: 2px solid #00695c; /* Dark Green accent bottom border */
-            padding-bottom: 0.6rem;
-        }
-        h3 {
-            font-size: 1.2rem;
-            margin-top: 1.2rem;
-            margin-bottom: 0.6rem;
-            color: #004d40; /* Dark Green for subheadings */
-            font-weight: 600; /* Slightly less bold than H2 */
-        }
-        .section-content {
-            margin-bottom: 2rem;
-        }
-        .experience-item, .presentation-item, .award-item {
-            margin-bottom: 1.2rem;
-            padding: 1rem 0; /* Consistent padding */
-            border-left: 4px solid #00695c; /* Dark Green accent line */
-            padding-left: 1rem;
-            background-color: #f9f9f9; /* Very light gray for items, subtle contrast */
-            box-shadow: 2px 2px 0px #e0e0e0; /* Very light gray shadow */
-        }
-        .experience-item p, .presentation-item p {
-            margin-top: 0.4rem;
-            color: #333333; /* Darker gray for readability in paragraphs */
-        }
-        .contact-info a, .navbar-link {
-            color: #2E8B57; /* Sea Green for links */
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .contact-info a:hover, .navbar-link:hover {
-            color: #004d40; /* Darker green on hover */
-            text-decoration: underline;
-        }
-        ul {
-            list-style: none;
+            margin: 0;
             padding: 0;
+            overflow: hidden; /* Prevent body scroll, content area will scroll */
         }
-        ul li {
-            margin-bottom: 0.4rem;
-            color: #004d40; /* Dark Green list items */
-            font-size: 0.95rem;
+        /* Custom scrollbar for content area */
+        .scroll-container::-webkit-scrollbar {
+            width: 8px;
         }
-        ul.list-disc-style {
-            list-style-type: square; /* Square bullet points */
-            padding-left: 1.5rem;
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem auto;
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 2.2rem;
-            }
-            h2 {
-                font-size: 1.6rem;
-            }
-            h3 {
-                font-size: 1.1rem;
-            }
-            .navbar a {
-                padding: 0.4rem 0.6rem;
-                margin: 0 0.2rem;
-                font-size: 0.8rem;
-            }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
         }
-
-        .navbar {
-            background-color: #e8f5e9; /* Very light green for navbar */
-            padding: 1rem 0;
-            text-align: center;
-            border-radius: 0; /* Sharp corners */
-            margin-bottom: 2rem;
-            border-bottom: 1px solid #004d40; /* Dark Green bottom border */
-            box-shadow: 0 2px 0px #00332e; /* Darker green shadow */
-        }
-        .navbar a {
-            color: #00695c; /* Dark Green accent for navbar link text */
-            padding: 0.6rem 1rem;
-            margin: 0 0.5rem;
-            border-radius: 0; /* Sharp button corners */
-            transition: background-color 0.3s ease, color 0.3s ease;
-            font-weight: 600;
-            background-color: #FFFFFF; /* White buttons */
-            border: 1px solid #004d40; /* Dark Green button borders */
-            box-shadow: 2px 2px 0px #00332e; /* Darker green button shadow */
-        }
-        .navbar a:hover {
-            background-color: #c8e6c9; /* Lighter green on hover */
-            color: #004d40; /* Keep dark green text on hover */
-            text-decoration: none;
-            transform: none;
-            box-shadow: 1px 1px 0px #00695c; /* Reduced green shadow on hover */
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
     </style>
 </head>
-<body class="p-4">
-    <nav class="navbar">
-        <a href="#home" class="navbar-link">CV PROFILE</a>
-        <a href="#projects" class="navbar-link">PROJECTS</a>
-        <a href="#thought-pieces" class="navbar-link">THOUGHT PIECES</a>
-    </nav>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Main Container - Flex layout for sidebar and content -->
+    <div class="flex flex-col md:flex-row h-screen">
 
-    <div class="container">
-        <header id="home" class="text-center pb-6 mb-6">
-            <h1 class="text-gray-900">PATRICK R. KNOWLES</h1>
-            <div class="contact-info text-gray-600 text-base mt-4">
-                <p>BOULDER CO, 80303 | +1 440.935.7638 | <a href="mailto:patrick.royk@gmail.com">PATRICK.ROYK@GMAIL.COM</a></p>
-                <p><a href="https://www.linkedin.com/in/patrick-r-knowles" target="_blank">LINKEDIN.COM/IN/PATRICK-R-KNOWLES</a></p>
-            </div>
-        </header>
-
-        <section class="section-content">
-            <h2>EDUCATION</h2>
-            <div class="experience-item">
-                <h3>Bowling Green State University</h3>
-                <p class="font-medium">Bachelor of Science in Physics</p>
-                <p>Minor in General Science</p>
-                <p>GPA 3.61</p>
-                <p class="text-sm">Bowling Green, OH - December 2023</p>
-            </div>
-        </section>
-
-        <section class="section-content">
-            <h2>RESEARCH EXPERIENCE</h2>
-
-            <div class="experience-item">
-                <h3>Bowling Green State University - SCAPS Recreation of Tandem Solar Cells</h3>
-                <p class="font-medium">Advisor: Marco Nardone</p>
-                <p class="text-sm">August 2023 - December 2023</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Recreated results in simulation of optimized high-current tandem solar-cells with efficiency beyond 41%.</li>
-                    <li>Ran computational models in Solar Cell Capacitance Simulator (SCAPS) to simulate solar cell performance, analyzing material properties and device structures to enhance efficiency and reduce energy losses.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Los Alamos National Laboratory - Science Undergraduate Laboratory Internship (SULI)</h3>
-                <p class="font-medium">Advisor: Donald Brown</p>
-                <p class="text-sm">August 2022 - December 2022</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Designed and developed $70,000 optical system within a team of three students that supported experimental research on material properties at Argonne National Laboratory, enhancing data analysis and interpretation.</li>
-                    <li>Facilitated team meetings to collaboratively troubleshoot and resolve technical issues with research apparatus, ensuring smooth and efficient operations.</li>
-                    <li>Engaged in weekly seminars and workshops focused on advanced optics and engineering methodologies, staying current with industry techniques and innovations.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Bowling Green State University - Numerical Simulation of Time-Resolved Photoluminescence</h3>
-                <p class="font-medium">Advisor: Marco Nardone</p>
-                <p class="text-sm">January 2022 - May 2022</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Prepared theoretical data of single photon time-resolved photoluminescence in MatLab.</li>
-                    <li>Conducted error analysis of theoretical data to experimental data using R-squared regression.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>Bowling Green State University - Quantum Dot Research Assistant</h3>
-                <p class="font-medium">Advisor: Mikhail Zamkov</p>
-                <p class="text-sm">September 2021 - December 2021</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Used Colloidal synthesis to create CdSe Quantum Dots in a controlled lab setting.</li>
-                    <li>Performed spectroscopy to find the emission spectrum of each Quantum Dot batch.</li>
-                    <li>Categorized and documented the creation process of each batch and reported results to the supervisor.</li>
-                </ul>
-            </div>
-
-            <div class="experience-item">
-                <h3>University Of Toledo - Research Experience Undergraduate (REU) Intern</h3>
-                <p class="font-medium">Advisor: Jacques Amar</p>
-                <p class="text-sm">May 2020 - August 2020</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Ran computational models of CdTe using a Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) at the femtosecond time scale via the Ohio Supercomputer.</li>
-                    <li>Calculated theoretical minimum energy saddle points of atom interactions using the Nudged Elastic Band method.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="section-content">
-            <h2>UNIVERSITY SERVICE</h2>
-            <div class="experience-item">
-                <h3>Bowling Green State University - Resident Advisor</h3>
-                <p class="text-sm">August 2021 - April 2022</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Promoted a positive living environment by organizing community-building activities, resolving conflicts, and supporting students' personal and academic growth.</li>
-                    <li>Ensured students' safety and well-being by enforcing hall policies, responding to emergencies, and providing guidance on campus resources.</li>
-                    <li>Facilitated peer connections and communication through regular meetings, workshops, and one-on-one interactions, fostering an inclusive and supportive community.</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>Bowling Green State University - Society of Physics Students Treasurer</h3>
-                <p class="text-sm">August 2022 - April 2023</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Maintained accurate financial records, including budgets, expense tracking, and financial reporting to ensure the organization's financial health and compliance with Bowling Green State University.</li>
-                    <li>Researched, wrote, and submitted grant proposals to secure funding for the organization, ensuring alignment with financial goals and project needs.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="section-content">
-            <h2>EDUCATIONAL TRAVEL</h2>
-            <div class="experience-item">
-                <h3>BGSU in Salzburg - Paris Londron University of Salzburg</h3>
-                <p class="text-sm">January 2023 - May 2023</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Explored exiled family history at Jewish grave sites, previous residencies, and at the Exil Arte Centrum in Vienna.</li>
-                    <li>Mingled with students from all over the world and personally explored different cultures in Spain, Africa, Italy, The United Kingdom, and Germany.</li>
-                    <li>Exercised foreign language skills in real-world settings and engaged with native speakers daily.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="section-content">
-            <h2>SKILLS</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                    <h3>Software & Languages:</h3>
-                    <ul class="list-disc-style">
-                        <li>Python</li>
-                        <li>C++</li>
-                        <li>C#</li>
-                        <li>LaTeX</li>
-                        <li>Microsoft Office</li>
-                        <li>FileZilla</li>
-                        <li>AutoCAD</li>
-                        <li>SQL</li>
-                        <li>LAMMPS</li>
-                    </ul>
+        <!-- Left Sidebar / Navigation -->
+        <aside class="w-full md:w-64 bg-white shadow-lg p-6 flex flex-col justify-between md:fixed md:h-full md:overflow-y-auto">
+            <div>
+                <!-- Name and Title -->
+                <div class="mb-8 text-center md:text-left">
+                    <h1 class="text-3xl font-bold text-gray-900 rounded-lg">Patrick R. Knowles</h1>
+                    <p class="text-md text-gray-600 rounded-lg">Physics Researcher & Developer</p>
                 </div>
-                <div>
-                    <h3>Laboratory:</h3>
-                    <ul class="list-disc-style">
-                        <li>Spectroscopy</li>
-                        <li>Quantum-Dot synthesis</li>
-                        <li>Basic chemistry lab operations</li>
-                        <li>Parallel Computing</li>
-                        <li>Python Data Automation</li>
-                        <li>Technical Writing</li>
+
+                <!-- Navigation Links -->
+                <nav>
+                    <ul>
+                        <li class="mb-3">
+                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="about">About Me</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="experience">Experience</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="projects">Projects</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="blog">Blog/Thoughts</a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="contact">Contact</a>
+                        </li>
                     </ul>
-                </div>
-                <div>
-                    <h3>Soft Skills:</h3>
-                    <ul class="list-disc-style">
-                        <li>Effective Communication</li>
-                        <li>Team leadership</li>
-                        <li>Efficient and Flexible Time Management</li>
-                        <li>Intellectual Humility</li>
-                        <li>Emotional Intelligence</li>
-                        <li>Oral Presentation</li>
-                    </ul>
+                </nav>
+            </div>
+
+            <!-- Social Media/Footer Links (Optional) -->
+            <div class="mt-8 text-center md:text-left">
+                <p class="text-sm text-gray-500">&copy; 2025 Patrick R. Knowles. All rights reserved.</p>
+                <div class="flex justify-center md:justify-start space-x-4 mt-2">
+                    <a href="https://www.linkedin.com/in/patrick-r-knowles" target="_blank" class="text-gray-500 hover:text-emerald-600 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <!-- Add more social media icons as needed, e.g., GitHub -->
+                    <!-- <a href="https://github.com/yourusername" target="_blank" class="text-gray-500 hover:text-emerald-600 rounded-full">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11 1.07-.25 1.07-.55v-1.99c-3.41.745-4.123-1.64-4.123-1.64-.56-.145-1.36-.43-1.04-.66.28-.2.95-.07 1.45.07.5.14 1.34.42 2.05.82.68.4 1.77.34 2.37.16.07-.37.28-.66.52-.81-2.6-.29-5.33-1.29-5.33-5.75 0-1.27.46-2.31 1.22-3.13-.12-.3-.53-1.48.11-3.09 0 0 1-.31 3.3.93.95-.26 1.95-.39 2.95-.39.99 0 1.99.13 2.95.39 2.3-1.24 3.3-.93 3.3-.93.64 1.61.23 2.79.11 3.09.76.82 1.22 1.86 1.22 3.13 0 4.47-2.73 5.46-5.34 5.75.42.36.81 1.09.81 2.2V23c0 .3-.46.66-1.07.55C20.562 21.8 24 17.302 24 12c0-6.627-5.373-12-12-12z" clip-rule="evenodd" />
+                        </svg>
+                    </a> -->
                 </div>
             </div>
-        </section>
+        </aside>
 
-        <section class="section-content">
-            <h2>AWARDS AND HONORS</h2>
-            <ul class="list-disc-style">
-                <li class="award-item">Bowling Green State University, Center for Undergraduate Research and Scholarship (CURS) $200</li>
-                <li class="award-item">Bowling Green State University, J. Robert and Gretchen Overman Scholarship Award (Academic honor) $800</li>
-            </ul>
-        </section>
+        <!-- Main Content Area -->
+        <main class="flex-1 md:ml-64 p-6 overflow-y-auto scroll-container">
+            <!-- About Me Section -->
+            <section id="about" class="content-section active mb-12 bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 rounded-lg">About Me</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="mb-4 text-lg leading-relaxed text-gray-700 rounded-lg">
+                            Hello! I'm Patrick R. Knowles, a dedicated Physics researcher with a Bachelor of Science in Physics and a Minor in General Science from Bowling Green State University. My passion lies in applying computational models and experimental techniques to understand and optimize material properties, particularly in the realm of solar cells and quantum dots.
+                        </p>
+                        <p class="mb-4 text-lg leading-relaxed text-gray-700 rounded-lg">
+                            My experience spans from simulating high-efficiency tandem solar cells using SCAPS to designing optical systems at Los Alamos National Laboratory, and conducting research on quantum dot synthesis. I thrive in environments that challenge me to integrate theoretical knowledge with practical applications, always striving for impactful solutions.
+                        </p>
+                        <p class="text-lg leading-relaxed text-gray-700 rounded-lg">
+                            Beyond my research, I possess strong skills in Python, C++, and various laboratory techniques, coupled with soft skills in effective communication and team leadership. I'm always eager to collaborate on innovative projects. Let's connect!
+                        </p>
+                    </div>
+                    <div class="flex justify-center rounded-lg overflow-hidden">
+                        <img src="https://placehold.co/600x400/b0c4de/ffffff?text=Your+Photo" alt="Your Profile Picture" class="w-full h-auto object-cover rounded-lg shadow-lg">
+                    </div>
+                </div>
+            </section>
 
-        <section class="section-content">
-            <h2>PRESENTATIONS</h2>
-            <h3>Posters:</h3>
-            <ul class="list-disc-style">
-                <li class="presentation-item">Knowles, P., Dr. Nardone M., (2022, May) Numerical Simulation of Time-Resolved Photoluminescence, CURS, Bowling Green, Ohio.</li>
-                <li class="presentation-item">Knowles, P., Dr. Nardone M., (2023 Dec) Investigation of Tandem Solar Cells Using SCAPS, Bowling Green, OH.</li>
-            </ul>
-            <h3 class="mt-4">Oral Presentations:</h3>
-            <ul class="list-disc-style">
-                <li class="presentation-item">Knowles, P. Dr. Amar, J., (2020 Aug) Activation barriers for the diffusion of Se interstitials in CdTe and CdSe, NSF-REU, Toledo, OH.</li>
-                <li class="presentation-item">Knowles, P. Dr. Brown, D., (2022 Dec) In-Situ Casting of TiNb Alloys, DOE-SULI, Los Alamos, NM.</li>
-            </ul>
-        </section>
+            <!-- Experience Section -->
+            <section id="experience" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 rounded-lg">Experience</h2>
 
-        <section class="section-content">
-            <h2>CLUBS & ORGANIZATIONS</h2>
-            <ul class="list-disc-style">
-                <li>Society of Physics Students (SPS)</li>
-                <li>American Physical Society (APS)</li>
-                <li>Roots Music Club</li>
-                <li>Hillel Club at BGSU</li>
-            </ul>
-        </section>
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800 rounded-lg">Research Experience</h3>
+
+                <div class="space-y-8 mb-8">
+                    <!-- Experience Item 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">SCAPS Recreation of Tandem Solar Cells</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Bowling Green State University, Bowling Green, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">August 2023 - December 2023</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Recreated results in simulation of optimized high-current tandem solar-cells with efficiency beyond 41%.</li>
+                            <li>Ran computational models in Solar Cell Capacitance Simulator (SCAPS) to simulate solar cell performance, analyzing material properties and device structures to enhance efficiency and reduce energy losses.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience Item 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Science Undergraduate Laboratory Internship (SULI)</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Los Alamos National Laboratory, Los Alamos, NM</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">August 2022 - December 2022</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Designed and developed $70,000 optical system with a team of three students that supported experimental research on material properties at Argonne National Laboratory, enhancing data analysis and interpretation.</li>
+                            <li>Facilitated team meetings to collaboratively troubleshoot and resolve technical issues with research apparatus, ensuring smooth and efficient operations.</li>
+                            <li>Engaged in weekly seminars and workshops focused on advanced optics and engineering methodologies, staying current with industry techniques and innovations.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience Item 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Numerical Simulation of Time-Resolved Photoluminescence</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Bowling Green State University, Bowling Green, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">January 2022 - May 2022</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Prepared theoretical data of single photon time-resolved photoluminescence in MatLab.</li>
+                            <li>Conducted error analysis of theoretical data to experimental data using R-squared regression.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience Item 4 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Quantum Dot Research Assistant</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Bowling Green State University, Bowling Green, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">September 2021 - December 2021</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Used Colloidal synthesis to create CdSe Quantum Dots in a controlled lab setting.</li>
+                            <li>Performed spectroscopy to find the emission spectrum of each Quantum Dot batch.</li>
+                            <li>Categorized and documented the creation process of each batch and reported results to the supervisor.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience Item 5 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Research Experience Undergraduate (REU) Intern</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">University Of Toledo, Toledo, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">May 2020 - August 2020</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Ran computational models of CdTe using a Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) at the femtosecond time scale via the Ohio Supercomputer.</li>
+                            <li>Calculated theoretical minimum energy saddle points of atom interactions using the Nudged Elastic Band method.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-semibold mb-4 text-gray-800 rounded-lg">University Service</h3>
+
+                <div class="space-y-8">
+                    <!-- Service Item 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Resident Advisor</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Bowling Green State University, Bowling Green, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">August 2021 - April 2022</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Promoted a positive living environment by organizing community-building activities, resolving conflicts, and supporting students' personal and academic growth.</li>
+                            <li>Ensured student's safety and well-being by enforcing hall policies, responding to emergencies, and providing guidance on campus resources.</li>
+                            <li>Facilitated peer connections and communication through regular meetings, workshops, and one-on-one interactions, fostering an inclusive and supportive community.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service Item 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                        <h4 class="text-xl font-bold text-gray-900 rounded-lg">Society of Physics Students Treasurer</h4>
+                        <p class="text-md font-medium text-gray-700 rounded-lg">Bowling Green State University, Bowling Green, OH</p>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">August 2022 - April 2023</p>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1 rounded-lg">
+                            <li>Maintained accurate financial records, including budgets, expense tracking, and financial reporting to ensure the organization's financial health and compliance with Bowling Green State University.</li>
+                            <li>Researched, wrote, and submitted grant proposals to secure funding for the organization, ensuring alignment with financial goals and project needs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 rounded-lg">My Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <!-- Updated image source -->
+                        <img src="/download/dababypt2.png-71822d19-d158-44a9-bdd9-136bfbda13cc" alt="Activation barriers for the diffusion of Se interstitials in CdTe and CdSe" class="w-full h-auto object-cover mb-4 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">Activation barriers for the diffusion of Se interstitials in CdTe and CdSe</h3>
+                        <p class="text-gray-600 mb-4 rounded-lg">This project focuses on the computational study of diffusion in semiconductor materials, specifically analyzing the energy barriers for selenium interstitials in CdTe and CdSe using molecular dynamics simulations.</p>
+                        <!-- Updated link to the PPTX file -->
+                        <a href="/download/finalPresentation.pptx" target="_blank" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Presentation &rarr;</a>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://placehold.co/400x250/a0a0a0/ffffff?text=Project+2+Image" alt="Project 2" class="w-full h-auto object-cover mb-4 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">Mobile Recipe App</h3>
+                        <p class="text-gray-600 mb-4 rounded-lg">A cross-platform mobile application for discovering and saving recipes, developed with React Native and Firebase.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://placehold.co/400x250/a0a0a0/ffffff?text=Project+3+Image" alt="Project 3" class="w-full h-auto object-cover mb-4 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">E-commerce Redesign</h3>
+                        <p class="text-gray-600 mb-4 rounded-lg">Full-stack e-commerce website redesign focusing on improved UX and performance, using Next.js and Stripe API.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Project &rarr;</a>
+                    </div>
+                    <!-- Project Card 4 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <img src="https://placehold.co/400x250/a0a0a0/ffffff?text=Project+4+Image" alt="Project 4" class="w-full h-auto object-cover mb-4 rounded-lg">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">3D Portfolio Scene</h3>
+                        <p class="text-gray-600 mb-4 rounded-lg">An interactive 3D scene built with Three.js showcasing personal artwork and design concepts in a virtual gallery.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Project &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog/Thoughts Section -->
+            <section id="blog" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 rounded-lg">Blog & Thoughts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">The Future of Web Design: Minimalism and AI</h3>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">Published on June 20, 2025</p>
+                        <p class="text-gray-600 mb-4 rounded-lg">An exploration into how artificial intelligence is shaping minimalist design principles and enhancing user experiences.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">Mastering Responsive Layouts with Tailwind CSS</h3>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">Published on May 15, 2025</p>
+                        <p class="text-gray-600 mb-4 rounded-lg">A deep dive into advanced Tailwind CSS techniques for creating highly flexible and responsive web interfaces.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
+                    </div>
+                    <!-- Blog Post 3 -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800 rounded-lg">My Journey into Creative Coding with p5.js</h3>
+                        <p class="text-sm text-gray-500 mb-3 rounded-lg">Published on April 10, 2025</p>
+                        <p class="text-gray-600 mb-4 rounded-lg">Discovering the joy of algorithmic art and interactive visuals using the p5.js library.</p>
+                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
+                <h2 class="text-4xl font-bold mb-6 text-gray-900 rounded-lg">Get in Touch</h2>
+                <p class="mb-6 text-lg leading-relaxed text-gray-700 rounded-lg">
+                    Have a project in mind, a question, or just want to say hello? Feel free to reach out! I'm always open to discussing new opportunities and collaborations.
+                </p>
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1 rounded-lg">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 rounded-lg" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1 rounded-lg">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 rounded-lg" placeholder="your.email@example.com">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1 rounded-lg">Message</label>
+                        <textarea id="message" name="message" rows="5" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500 rounded-lg" placeholder="Your message..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full md:w-auto px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors duration-200 rounded-lg">Send Message</button>
+                </form>
+                <div class="mt-8 text-center md:text-left">
+                    <p class="text-lg text-gray-700 rounded-lg">Or connect with me directly:</p>
+                    <p class="text-emerald-600 text-lg font-medium rounded-lg">patrick.royk@gmail.com</p>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <div class="container mt-8" id="projects">
-        <h2>PROJECT ARCHIVE</h2>
-        <div class="section-content">
-            <div class="experience-item">
-                <h3>REU 2021: Thin Film Structures in Solar Panels</h3>
-                <p class="font-medium">Technologies: Molecular Dynamics, LAMMPS, Nudged Elastic Band method</p>
-                <p>This project involved studying thin film structures, specifically focusing on the energy barriers of Selenium (Se) interstitials in Cadmium Telluride (CdTe) and Cadmium Selenide (CdSe) using molecular dynamics simulations. The goal was to understand how these structures impact the efficiency of solar cells.</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Investigated atomic interactions and energy barriers in semiconductor materials.</li>
-                    <li>Utilized computational models to simulate material properties and diffusion.</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>Numerical Simulation of Time-Resolved Photoluminescence for Solar Cells</h3>
-                <p class="font-medium">Technologies: MatLab, COMSOL Multiphysics®</p>
-                <p>This project focused on using numerical simulations of Time-Resolved Photoluminescence (TRPL) to better understand recombination mechanisms in photovoltaic materials like Cd(Se, Te) solar cells. The research aimed to improve solar cell performance by analyzing TRPL data at various light intensities, material thicknesses, and charge carrier mobilities.</p>
-                <ul class="list-disc-style mt-2">
-                    <li>Prepared theoretical data of single photon time-resolved photoluminescence.</li>
-                    <li>Conducted error analysis of theoretical data to experimental data using R-squared regression.</li>
-                    <li>Explored the effectiveness of analytical models for TRPL data.</li>
-                </ul>
-            </div>
-            <p>// STATUS: SECTION UNDER CONSTRUCTION. NEW DATA COMING SOON! //</p>
-        </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            // Get all content sections
+            const contentSections = document.querySelectorAll('.content-section');
 
-    <div class="container mt-8" id="thought-pieces">
-        <h2>THOUGHT PIECE DATABASE</h2>
-        <div class="section-content">
-            <p>// STATUS: SECTION UNDER CONSTRUCTION. NEW INSIGHTS COMING SOON! //</p>
-        </div>
-    </div>
+            // Function to show a specific section and hide others
+            const showSection = (targetId) => {
+                contentSections.forEach(section => {
+                    if (section.id === targetId) {
+                        section.classList.remove('hidden');
+                        section.classList.add('active'); // Add active class if you want to style the active section
+                    } else {
+                        section.classList.add('hidden');
+                        section.classList.remove('active');
+                    }
+                });
+
+                // Update active state for navigation links
+                navLinks.forEach(link => {
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('bg-emerald-500', 'text-white');
+                        link.classList.remove('hover:bg-emerald-500', 'hover:text-white', 'text-gray-700');
+                    } else {
+                        link.classList.remove('bg-emerald-500', 'text-white');
+                        link.classList.add('hover:bg-emerald-500', 'hover:text-white', 'text-gray-700');
+                    }
+                });
+            };
+
+            // Add click event listener to each navigation link
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior (page refresh)
+                    const targetId = e.target.dataset.target; // Get the target section ID from data-target attribute
+                    showSection(targetId); // Show the corresponding section
+                });
+            });
+
+            // Initially show the 'about' section and set its nav link as active
+            showSection('about');
+        });
+    </script>
 </body>
 </html>
+
   
