@@ -3,319 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick R. Knowles - Personal Website</title>
+    <title>Patrick R. Knowles | Personal Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            /* No overflow: hidden on body, let the page content dictate scroll */
+            background-color: #1a202c; /* A dark theme background */
         }
-        /* Custom scrollbar for content area - kept for larger screens */
-        .scroll-container::-webkit-scrollbar {
-            width: 8px;
+        .section-padding {
+            padding: 4rem 1rem;
         }
-        .scroll-container::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: #555;
-            border-radius: 10px;
-        }
-
-        /* Ensure the main content area has its own scrollbar when needed */
-        .main-content-area {
-            overflow-y: auto; /* Allows vertical scrolling for the content area */
-            -webkit-overflow-scrolling: touch; /* Improves scrolling performance on iOS */
+        .container {
+            max-width: 1200px;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="flex flex-col md:flex-row min-h-screen"> <aside class="w-full md:w-64 bg-white shadow-lg p-6 flex flex-col justify-between">
-            <div>
-                <div class="mb-8 text-center md:text-left">
-                    <h1 class="text-3xl font-bold text-gray-900">Patrick Knowles</h1>
-                    <p class="text-md text-gray-600">mech-e with a physics background</p>
+<body class="bg-gray-900 text-gray-100">
+
+    <!-- Header Section -->
+    <header class="bg-gray-800 shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-100">Patrick R. Knowles</div>
+            <nav class="hidden md:flex space-x-6 text-gray-400">
+                <a href="#about" class="hover:text-white transition duration-300 ease-in-out">About</a>
+                <a href="#skills" class="hover:text-white transition duration-300 ease-in-out">Skills</a>
+                <a href="#portfolio" class="hover:text-white transition duration-300 ease-in-out">Research & Projects</a>
+                <a href="#contact" class="hover:text-white transition duration-300 ease-in-out">Contact</a>
+            </nav>
+            <button id="menu-button" class="md:hidden text-gray-400 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-md">
+            <a href="#about" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">About</a>
+            <a href="#skills" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Skills</a>
+            <a href="#portfolio" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Research & Projects</a>
+            <a href="#contact" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero/About Section -->
+    <section id="about" class="bg-gray-900 section-padding flex items-center justify-center">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+                <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg border-4 border-gray-700">
+                    <img src="uploaded:IMG_8082(1).jpg-9fcc11f7-d172-4bb2-8cae-b299ba795ae9" alt="Patrick Knowles Profile Picture" class="w-full h-full object-cover">
                 </div>
-
-                <nav>
-                    <ul>
-                        <li class="mb-3">
-                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="about">About Me</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="experience">Experience</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="projects">Projects</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="blog">Blog/Thoughts</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="#" class="nav-link block p-3 text-lg text-gray-700 hover:bg-emerald-500 hover:text-white transition-colors duration-200 rounded-lg" data-target="contact">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
+                <div class="mt-4 md:mt-0 max-w-lg">
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-indigo-400 leading-tight mb-2">Hello, I'm Patrick R. Knowles</h1>
+                    <p class="text-lg md:text-xl text-gray-300">I am a recent graduate with a Bachelor of Science in Physics from Bowling Green State University. My passion lies in applying computational models and laboratory techniques to solve complex problems, with a focus on solar cells and advanced optical systems.</p>
+                </div>
             </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="bg-gray-800 section-padding">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400 mb-12">My Skills</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Software & Languages</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-200">
+                        <li>Python</li>
+                        <li>C++, C#</li>
+                        <li>LaTeX</li>
+                        <li>MATLAB</li>
+                        <li>SQL</li>
+                        <li>AutoCAD, FileZilla</li>
+                        <li>Microsoft Office</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Laboratory & Technical</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-200">
+                        <li>Spectroscopy</li>
+                        <li>FEA</li>
+                        <li>Quantum-Dot synthesis</li>
+                        <li>Parallel Computing</li>
+                        <li>Python Data Automation</li>
+                        <li>Technical Writing</li>
+                        <li>Basic chemistry lab operations</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Soft Skills</h3>
+                    <ul class="list-disc list-inside space-y-1 text-gray-200">
+                        <li>Effective Communication</li>
+                        <li>Team leadership</li>
+                        <li>Time Management</li>
+                        <li>Intellectual Humility</li>
+                        <li>Emotional Intelligence</li>
+                        <li>Oral Presentation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="mt-8 text-center md:text-left">
-                <p class="text-sm text-gray-500">Site updated 6.27.2025 Patrick R. Knowles.</p>
-                <div class="flex justify-center md:justify-start space-x-4 mt-2">
-                    <a href="https://www.linkedin.com/in/patrick-r-knowles" target="_blank" class="text-gray-500 hover:text-emerald-600 rounded-full">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
-                        </svg>
+    <!-- Research & Projects Section -->
+    <section id="portfolio" class="bg-gray-900 section-padding">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400 mb-12">Research & Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Tandem Solar Cells -->
+                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Solar+Cells" alt="Solar Cell Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg md:text-xl mb-2">SCAPS Recreation of Tandem Solar Cells</h3>
+                        <p class="text-gray-400 text-sm">Dates: Aug 2023 - Dec 2023</p>
+                        <p class="text-gray-400 text-sm mt-2">Recreated simulation results of optimized high-current tandem solar-cells with efficiency beyond 41%, analyzing material properties to enhance efficiency and reduce energy losses.</p>
+                    </div>
+                </div>
+                <!-- Project 2: SULI Internship -->
+                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Optical+System" alt="Optical System Project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg md:text-xl mb-2">Science Undergraduate Laboratory Internship</h3>
+                        <p class="text-gray-400 text-sm">Dates: Aug 2022 - Dec 2022</p>
+                        <p class="text-gray-400 text-sm mt-2">Designed and developed a $70,000 optical system to support experimental research on material properties at Argonne National Laboratory, enhancing data analysis and interpretation.</p>
+                    </div>
+                </div>
+                <!-- Project 3: Photoluminescence -->
+                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Photoluminescence" alt="Photoluminescence Simulation" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg md:text-xl mb-2">Numerical Simulation of Time-Resolved Photoluminescence</h3>
+                        <p class="text-gray-400 text-sm">Dates: Jan 2022 - May 2022</p>
+                        <p class="text-gray-400 text-sm mt-2">Prepared theoretical data of single photon time-resolved photoluminescence in MatLab and conducted error analysis of theoretical data to experimental data using R-squared regression.</p>
+                    </div>
+                </div>
+                <!-- Project 4: Quantum Dots -->
+                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
+                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Quantum+Dots" alt="Quantum Dot Research" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg md:text-xl mb-2">Quantum Dot Research Assistant</h3>
+                        <p class="text-gray-400 text-sm">Dates: Sep 2021 - Dec 2021</p>
+                        <p class="text-gray-400 text-sm mt-2">Used colloidal synthesis to create CdSe Quantum Dots in a controlled lab setting, performed spectroscopy to find the emission spectrum, and documented the creation process.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-gray-800 section-padding">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-indigo-400 mb-4">Get in Touch</h2>
+            <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">I am always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on social media.</p>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <a href="mailto:patrick.royk@gmail.com" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105">Email Me</a>
+                <!-- Social media links could go here -->
+                <div class="flex space-x-4">
+                    <a href="https://www.linkedin.com/in/patrick-r-knowles" class="text-gray-400 hover:text-indigo-400 transition duration-300 ease-in-out" aria-label="LinkedIn">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                     </a>
                 </div>
             </div>
-        </aside>
+        </div>
+    </section>
 
-        <main class="flex-1 p-6 main-content-area md:ml-64">
-            <section id="about" class="content-section active mb-12 bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900">About Me</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                    <div>
-                        <p class="mb-4 text-lg leading-relaxed text-gray-700">
-                            Hello! I'm Patrick Knowles. I have a bachelor of science in physics and a minor in general science from Bowling Green State University. I am currently in a master of science program in mechanical engineering at the University of Colorado and am expecting to graduate in the spring of 2027! I have a deep interest in applying computational tools to aid experimental research. But with this, I also enjoy learning about various different fields such as complex systems, social science, sports science, etc.
-                        </p>
-                        <p class="mb-4 text-lg leading-relaxed text-gray-700">
-                            My previous experience is largely simulating materials using a variety of software, designing an optical system at Los Alamos National Laboratory, and conducting experimental research on quantum dot synthesis. As of today, I would like to apply my knowledge in creating practical solutions toward problems facing humanitarian efforts. An example of this would be to develop cheaper alternatives to established but deeply unfair norms. Such as farmers facing incredible financial strain due to modern machine costs or creating a microscope with cost-effective materials to help doctors in disadvantaged areas detect diseases faster. I am also interested in aiding fundemental research efforts through computational prediction!
-                        </p>
-                        <p class="text-lg leading-relaxed text-gray-700">
-                            Beyond my research and interests, I possess strong skills in Python, C++, and various laboratory techniques, coupled with soft skills in effective communication and team leadership. I'm always eager to collaborate on innovative projects. Let's connect!
-                        </p>
-                    </div>
-                    <div class="flex justify-center overflow-hidden">
-                        <img src="IMG_6712.jpg" alt="Your Profile Picture" class="w-full h-auto object-cover rounded-lg shadow-lg">
-                    </div>
-                </div>
-            </section>
-
-            <section id="experience" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900">Experience</h2>
-
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">Research Experience</h3>
-
-                <div class="space-y-8 mb-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">SCAPS Recreation of Tandem Solar Cells</h4>
-                        <p class="text-md font-medium text-gray-700">Bowling Green State University, Bowling Green, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">August 2023 - December 2023</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Recreated results in simulation of optimized high-current tandem solar-cells with efficiency beyond 41%.</li>
-                            <li>Ran computational models in Solar Cell Capacitance Simulator (SCAPS) to simulate solar cell performance, analyzing material properties and device structures to enhance efficiency and reduce energy losses.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Science Undergraduate Laboratory Internship (SULI)</h4>
-                        <p class="text-md font-medium text-gray-700">Los Alamos National Laboratory, Los Alamos, NM</p>
-                        <p class="text-sm text-gray-500 mb-3">August 2022 - December 2022</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Designed and developed $70,000 optical system with a team of three students that supported experimental research on material properties at Argonne National Laboratory, enhancing data analysis and interpretation.</li>
-                            <li>Facilitated team meetings to collaboratively troubleshoot and resolve technical issues with research apparatus, ensuring smooth and efficient operations.</li>
-                            <li>Engaged in weekly seminars and workshops focused on advanced optics and engineering methodologies, staying current with industry techniques and innovations.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Numerical Simulation of Time-Resolved Photoluminescence</h4>
-                        <p class="text-md font-medium text-gray-700">Bowling Green State University, Bowling Green, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">January 2022 - May 2022</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Prepared theoretical data of single photon time-resolved photoluminescence in MatLab.</li>
-                            <li>Conducted error analysis of theoretical data to experimental data using R-squared regression.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Quantum Dot Research Assistant</h4>
-                        <p class="text-md font-medium text-gray-700">Bowling Green State University, Bowling Green, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">September 2021 - December 2021</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Used Colloidal synthesis to create CdSe Quantum Dots in a controlled lab setting.</li>
-                            <li>Performed spectroscopy to find the emission spectrum of each Quantum Dot batch.</li>
-                            <li>Categorized and documented the creation process of each batch and reported results to the supervisor.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Research Experience Undergraduate (REU) Intern</h4>
-                        <p class="text-md font-medium text-gray-700">University Of Toledo, Toledo, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">May 2020 - August 2020</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Ran computational models of CdTe using a Large-scale Atomic/Molecular Massively Parallel Simulator (LAMMPS) at the femtosecond time scale via the Ohio Supercomputer.</li>
-                            <li>Calculated theoretical minimum energy saddle points of atom interactions using the Nudged Elastic Band method.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3 class="text-2xl font-semibold mb-4 text-gray-800">University Service</h3>
-
-                <div class="space-y-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Resident Advisor</h4>
-                        <p class="text-md font-medium text-gray-700">Bowling Green State University, Bowling Green, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">August 2021 - April 2022</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Promoted a positive living environment by organizing community-building activities, resolving conflicts, and supporting students' personal and academic growth.</li>
-                            <li>Ensured student's safety and well-being by enforcing hall policies, responding to emergencies, and providing guidance on campus resources.</li>
-                            <li>Facilitated peer connections and communication through regular meetings, workshops, and one-on-one interactions, fostering an inclusive and supportive community.</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-sm">
-                        <h4 class="text-xl font-bold text-gray-900">Society of Physics Students Treasurer</h4>
-                        <p class="text-md font-medium text-gray-700">Bowling Green State University, Bowling Green, OH</p>
-                        <p class="text-sm text-gray-500 mb-3">August 2022 - April 2023</p>
-                        <ul class="list-disc list-inside text-gray-600 space-y-1">
-                            <li>Maintained accurate financial records, including budgets, expense tracking, and financial reporting to ensure the organization's financial health and compliance with Bowling Green State University.</li>
-                            <li>Researched, wrote, and submitted grant proposals to secure funding for the organization, ensuring alignment with financial goals and project needs.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section id="projects" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900">My Projects</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="Assets/dababypt2.png" alt="Activation barriers for the diffusion of Se interstitials in CdTe and CdSe" class="w-full h-auto object-cover mb-4 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Activation barriers for the diffusion of Se interstitials in CdTe and CdSe</h3>
-                        <p class="text-gray-600 mb-4">This project focuses on the computational study of diffusion in semiconductor materials, specifically analyzing the energy barriers for selenium interstitials in CdTe and CdSe using molecular dynamics simulations.</p>
-                        <a href="Assets/finalPresentationreu.pdf" target="_blank" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Presentation &rarr;</a>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="Assets/Screenshot 2022-05-06 105600.png" alt="Numerical Simulation of Time-Resolved Photoluminescence to Improve Solar Cell Performance" class="w-full h-auto object-cover mb-4 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Numerical Simulation of Time-Resolved Photoluminescence to Improve Solar Cell Performance</h3>
-                        <p class="text-gray-600 mb-4">This research explores how analytical models can account for Time-Resolved Photoluminescence (TRPL) data in solar cells. Numerical simulations were used to analyze TRPL at various light intensities, material thicknesses, and charge carrier mobilities.</p>
-                        <a href="Assets/Patrick Knowles CURs poster .pdf" target="_blank" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Poster (PDF) &rarr;</a>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/400x250/a0a0a0/ffffff?text=Project+3+Image" alt="Project 3" class="w-full h-auto object-cover mb-4 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">???</h3>
-                        <p class="text-gray-600 mb-4">???</p>
-                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Project &rarr;</a>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <img src="https://placehold.co/400x250/a0a0a0/ffffff?text=Project+4+Image" alt="Project 4" class="w-full h-auto object-cover mb-4 rounded-lg">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">???</h3>
-                        <p class="text-gray-600 mb-4">???</p>
-                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">View Project &rarr;</a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="blog" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900">Blog & Thoughts</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Coming soon!</h3>
-                        <p class="text-sm text-gray-500 mb-3">Published on June 20, 2025</p>
-                        <p class="text-gray-600 mb-4">Blah Blah Blah!</p>
-                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Coming soon!</h3>
-                        <p class="text-sm text-gray-500 mb-3">Published on May 15, 2025</p>
-                        <p class="text-gray-600 mb-4">Blah Blah Blah</p>
-                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Coming soon!</h3>
-                        <p class="text-sm text-gray-500 mb-3">Published on April 10, 2025</p>
-                        <p class="text-gray-600 mb-4">Blah Blah Blah</p>
-                        <a href="#" class="text-emerald-600 hover:text-emerald-800 font-medium rounded-lg">Read More &rarr;</a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="contact" class="content-section hidden mb-12 bg-white p-8 rounded-lg shadow-md">
-                <h2 class="text-4xl font-bold mb-6 text-gray-900">Get in Touch</h2>
-                <p class="mb-6 text-lg leading-relaxed text-gray-700">
-                    Have a project in mind, a question, or just want to say hello? Feel free to reach out! I'm always open to discussing new opportunities and collaborations.
-                </p>
-                <form class="space-y-4">
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                        <input type="text" id="name" name="name" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" placeholder="Your Name">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" placeholder="your.email@example.com">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                        <textarea id="message" name="message" rows="5" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-emerald-500 focus:border-emerald-500" placeholder="Your message..."></textarea>
-                    </div>
-                    <button type="submit" class="w-full md:w-auto px-6 py-3 bg-emerald-600 text-white font-semibold rounded-lg shadow-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 transition-colors duration-200">Send Message</button>
-                </form>
-                <div class="mt-8 text-center md:text-left">
-                    <p class="text-lg text-gray-700">Or reachout to me through Linkedin. The Icon in the bottom left should send you to my profile!</p>
-                    <p class="text-emerald-600 text-lg font-medium"></p>
-                </div>
-            </section>
-        </main>
-    </div>
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-white py-6">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 Patrick R. Knowles. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Get all navigation links
-            const navLinks = document.querySelectorAll('.nav-link');
-            // Get all content sections
-            const contentSections = document.querySelectorAll('.content-section');
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-            // Function to show a specific section and hide others
-            const showSection = (targetId) => {
-                contentSections.forEach(section => {
-                    if (section.id === targetId) {
-                        section.classList.remove('hidden');
-                        section.classList.add('active'); // Add active class if you want to style the active section
-                    } else {
-                        section.classList.add('hidden');
-                        section.classList.remove('active');
-                    }
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
                 });
+            }
 
-                // Update active state for navigation links
-                navLinks.forEach(link => {
-                    if (link.dataset.target === targetId) {
-                        link.classList.add('bg-emerald-500', 'text-white');
-                        link.classList.remove('hover:bg-emerald-500', 'hover:text-white', 'text-gray-700');
-                    } else {
-                        link.classList.remove('bg-emerald-500', 'text-white');
-                        link.classList.add('hover:bg-emerald-500', 'hover:text-white', 'text-gray-700');
-                    }
-                });
-            };
-
-            // Add click event listener to each navigation link
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default link behavior (page refresh)
-                    const targetId = e.target.dataset.target; // Get the target section ID from data-target attribute
-                    showSection(targetId); // Show the corresponding section
-
-                    // Scroll the main content area to the top when a new section is shown
-                    // This is important because the content area now handles its own scroll
-                    document.querySelector('.main-content-area').scrollTo({
-                        top: 0,
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
                         behavior: 'smooth'
                     });
+                    // Close mobile menu after clicking a link
+                    if (!mobileMenu.classList.contains('hidden')) {
+                         mobileMenu.classList.add('hidden');
+                    }
                 });
             });
-
-            // Initially show the 'about' section and set its nav link as active
-            showSection('about');
         });
     </script>
+
 </body>
 </html>
+
