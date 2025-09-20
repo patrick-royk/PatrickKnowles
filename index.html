@@ -1,208 +1,380 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick R. Knowles | Personal Website</title>
+    <title>Interactive Resume | Patrick Knowles</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Neutral -->
+    <!-- Application Structure Plan: The application is designed as a single-page, top-down portfolio that allows for both linear scrolling and quick navigation via a sticky header. The structure prioritizes immediate impact by placing a summary and interactive skills filter at the top. The core interaction connects the "Technical Skills" section with the "Experience" timeline. A user can click a skill (e.g., 'Python'), and the timeline instantly filters to show only the jobs where that skill was applied. This was chosen because it directly answers a recruiter's primary question: "Where have you used this skill?" It's a much faster and more engaging way to demonstrate qualifications than a traditional, static document, making it ideal for the fast-paced environment of a job fair. -->
+    <!-- Visualization & Content Choices: 
+        - Summary of Qualifications: Report Info -> Professional Summary -> Goal: Inform -> Presentation: Prominent text block -> Interaction: None -> Justification: Provides an immediate, high-level overview of the candidate's profile.
+        - Technical Skills: Report Info -> Skills List -> Goal: Organize & Relate -> Presentation: Grouped, interactive filter buttons -> Interaction: Click-to-filter the experience timeline -> Justification: Creates a direct, visual link between capabilities and their practical application, which is a key requirement for recruiters.
+        - Experience Timeline: Report Info -> Work/Research History -> Goal: Show Change & Detail -> Presentation: Interactive, expandable vertical timeline -> Interaction: Items expand/collapse on click to show details; items are filtered by the skills section -> Justification: An expandable timeline is more scannable and less overwhelming than a long list of bullet points. The filtering interaction adds a powerful layer of data exploration.
+        - Presentations & Education: Report Info -> Honors, Presentations, Education -> Goal: Inform -> Presentation: Clean, organized card-based layouts -> Interaction: None -> Justification: This information is important but more supplementary. A clean, static presentation is sufficient and keeps the focus on the main interactive elements. 
+        - Library/Method: All interactions are handled with vanilla JavaScript to keep the application lightweight and fast. Styling is done with Tailwind CSS. NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* A dark theme background */
+            background-color: #f8fafc;
         }
-        .section-padding {
-            padding: 4rem 1rem;
+        .skill-btn {
+            transition: all 0.2s ease-in-out;
         }
-        .container {
-            max-width: 1200px;
+        .skill-btn.active {
+            background-color: #2563eb;
+            color: white;
+            transform: scale(1.05);
+        }
+        .timeline-item {
+            transition: opacity 0.4s ease-in-out, max-height 0.5s ease-in-out, transform 0.3s ease-in-out;
+            max-height: 200px;
+            overflow: hidden;
+        }
+        .timeline-item.hidden-skill {
+            opacity: 0;
+            max-height: 0;
+            transform: scaleY(0);
+        }
+        .timeline-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .timeline-item.open .timeline-details {
+            max-height: 500px;
+        }
+        .timeline-connector {
+            width: 2px;
+            background-color: #d1d5db;
+        }
+        .timeline-dot {
+            width: 1rem;
+            height: 1rem;
+            border-width: 2px;
+            border-color: #d1d5db;
+            background-color: #f8fafc;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .timeline-item.open .timeline-dot {
+             background-color: #2563eb;
+             border-color: #2563eb;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100">
+<body class="text-gray-800 font-sans antialiased">
 
-    <!-- Header Section -->
-    <header class="bg-gray-800 shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-gray-100">Patrick R. Knowles</div>
-            <nav class="hidden md:flex space-x-6 text-gray-400">
-                <a href="#about" class="hover:text-white transition duration-300 ease-in-out">About</a>
-                <a href="#skills" class="hover:text-white transition duration-300 ease-in-out">Skills</a>
-                <a href="#portfolio" class="hover:text-white transition duration-300 ease-in-out">Research & Projects</a>
-                <a href="#contact" class="hover:text-white transition duration-300 ease-in-out">Contact</a>
+    <header id="header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-900">Patrick Knowles</h1>
+                <p class="text-sm text-blue-600 font-medium">Mechanical Engineering Graduate Student</p>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                <a href="#skills" class="hover:text-blue-600 transition-colors">Skills</a>
+                <a href="#experience" class="hover:text-blue-600 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-blue-600 transition-colors">Projects</a>
+                <a href="#education" class="hover:text-blue-600 transition-colors">Education</a>
             </nav>
-            <button id="menu-button" class="md:hidden text-gray-400 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                </svg>
-            </button>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 shadow-md">
-            <a href="#about" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">About</a>
-            <a href="#skills" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Skills</a>
-            <a href="#portfolio" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Research & Projects</a>
-            <a href="#contact" class="block py-2 px-4 text-gray-400 hover:bg-gray-700">Contact</a>
         </div>
     </header>
 
-    <!-- Hero/About Section -->
-    <section id="about" class="bg-gray-900 section-padding flex items-center justify-center">
-        <div class="container mx-auto px-4 text-center">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-                <div class="w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg border-4 border-gray-700">
-                    <img src="uploaded:IMG_8082(1).jpg-9fcc11f7-d172-4bb2-8cae-b299ba795ae9" alt="Patrick Knowles Profile Picture" class="w-full h-full object-cover">
-                </div>
-                <div class="mt-4 md:mt-0 max-w-lg">
-                    <h1 class="text-3xl md:text-5xl font-extrabold text-indigo-400 leading-tight mb-2">Hello, I'm Patrick R. Knowles</h1>
-                    <p class="text-lg md:text-xl text-gray-300">I am a recent graduate with a Bachelor of Science in Physics from Bowling Green State University. My passion lies in applying computational models and laboratory techniques to solve complex problems, with a focus on solar cells and advanced optical systems.</p>
-                </div>
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="summary" class="mb-16 text-center">
+            <h2 class="text-3xl font-bold mb-4">Summary of Qualifications</h2>
+            <p class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+                Detail-oriented Physics graduate with a passion for applying computational and laboratory skills to complex engineering challenges. Over three years of research experience in fields including optics, computational modeling, and materials science, with a proven ability to design and troubleshoot systems, analyze data, and present technical findings. Proficient in a variety of programming and engineering software, with strong communication and collaborative skills.
+            </p>
+        </section>
+
+        <section id="skills" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Technical Skills</h2>
+            <div class="text-center mb-6">
+                <p class="text-gray-600">Welcome to the interactive portion of my resume. Click on a skill below to filter my professional experience and see where I've applied it.</p>
             </div>
-        </div>
-    </section>
+            <div id="skill-filters" class="flex flex-wrap justify-center gap-3">
+            </div>
+        </section>
+        
+        <section id="experience" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Engineering & Research Experience</h2>
+            <div id="experience-timeline" class="relative max-w-3xl mx-auto">
+                <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-2 bottom-2 timeline-connector"></div>
+            </div>
+        </section>
+
+        <section id="projects" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Presentations & Honors</h2>
+            <div id="projects-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+        
+        <section id="education" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">Education</h2>
+            <div id="education-list" class="max-w-3xl mx-auto space-y-6">
+            </div>
+        </section>
+
+    </main>
     
-    <!-- Skills Section -->
-    <section id="skills" class="bg-gray-800 section-padding">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400 mb-12">My Skills</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
-                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Software & Languages</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-200">
-                        <li>Python</li>
-                        <li>C++, C#</li>
-                        <li>LaTeX</li>
-                        <li>MATLAB</li>
-                        <li>SQL</li>
-                        <li>AutoCAD, FileZilla</li>
-                        <li>Microsoft Office</li>
-                    </ul>
-                </div>
-                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
-                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Laboratory & Technical</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-200">
-                        <li>Spectroscopy</li>
-                        <li>FEA</li>
-                        <li>Quantum-Dot synthesis</li>
-                        <li>Parallel Computing</li>
-                        <li>Python Data Automation</li>
-                        <li>Technical Writing</li>
-                        <li>Basic chemistry lab operations</li>
-                    </ul>
-                </div>
-                <div class="bg-gray-700 p-6 rounded-lg shadow-md">
-                    <h3 class="font-bold text-lg md:text-xl mb-2 text-indigo-300">Soft Skills</h3>
-                    <ul class="list-disc list-inside space-y-1 text-gray-200">
-                        <li>Effective Communication</li>
-                        <li>Team leadership</li>
-                        <li>Time Management</li>
-                        <li>Intellectual Humility</li>
-                        <li>Emotional Intelligence</li>
-                        <li>Oral Presentation</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Research & Projects Section -->
-    <section id="portfolio" class="bg-gray-900 section-padding">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-indigo-400 mb-12">Research & Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: Tandem Solar Cells -->
-                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Solar+Cells" alt="Solar Cell Project" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg md:text-xl mb-2">SCAPS Recreation of Tandem Solar Cells</h3>
-                        <p class="text-gray-400 text-sm">Dates: Aug 2023 - Dec 2023</p>
-                        <p class="text-gray-400 text-sm mt-2">Recreated simulation results of optimized high-current tandem solar-cells with efficiency beyond 41%, analyzing material properties to enhance efficiency and reduce energy losses.</p>
-                    </div>
-                </div>
-                <!-- Project 2: SULI Internship -->
-                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Optical+System" alt="Optical System Project" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg md:text-xl mb-2">Science Undergraduate Laboratory Internship</h3>
-                        <p class="text-gray-400 text-sm">Dates: Aug 2022 - Dec 2022</p>
-                        <p class="text-gray-400 text-sm mt-2">Designed and developed a $70,000 optical system to support experimental research on material properties at Argonne National Laboratory, enhancing data analysis and interpretation.</p>
-                    </div>
-                </div>
-                <!-- Project 3: Photoluminescence -->
-                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Photoluminescence" alt="Photoluminescence Simulation" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg md:text-xl mb-2">Numerical Simulation of Time-Resolved Photoluminescence</h3>
-                        <p class="text-gray-400 text-sm">Dates: Jan 2022 - May 2022</p>
-                        <p class="text-gray-400 text-sm mt-2">Prepared theoretical data of single photon time-resolved photoluminescence in MatLab and conducted error analysis of theoretical data to experimental data using R-squared regression.</p>
-                    </div>
-                </div>
-                <!-- Project 4: Quantum Dots -->
-                <div class="bg-gray-800 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out overflow-hidden">
-                    <img src="https://placehold.co/600x400/374151/d1d5db?text=Quantum+Dots" alt="Quantum Dot Research" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg md:text-xl mb-2">Quantum Dot Research Assistant</h3>
-                        <p class="text-gray-400 text-sm">Dates: Sep 2021 - Dec 2021</p>
-                        <p class="text-gray-400 text-sm mt-2">Used colloidal synthesis to create CdSe Quantum Dots in a controlled lab setting, performed spectroscopy to find the emission spectrum, and documented the creation process.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="bg-gray-800 section-padding">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-indigo-400 mb-4">Get in Touch</h2>
-            <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto">I am always open to new opportunities and collaborations. Feel free to reach out to me via email or connect with me on social media.</p>
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                <a href="mailto:patrick.royk@gmail.com" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105">Email Me</a>
-                <!-- Social media links could go here -->
-                <div class="flex space-x-4">
-                    <a href="https://www.linkedin.com/in/patrick-r-knowles" class="text-gray-400 hover:text-indigo-400 transition duration-300 ease-in-out" aria-label="LinkedIn">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.766s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.766-1.75 1.766zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Patrick R. Knowles. All rights reserved.</p>
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <h3 class="text-xl font-bold mb-2">Contact Me</h3>
+            <p>Your City, State | 303-555-1234 | PatrickKnowles@email.com</p>
+            <p class="mt-1">linkedin.com/in/patrickknowles</p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+        const resumeData = {
+            skills: {
+                "Software & Languages": ["Python", "C++", "C", "SQL", "MatLab", "CAD", "FEA", "LaTex", "LAMMPS", "SCAPS"],
+                "Laboratory": ["Spectroscopy", "Parallel Computing", "Python Data Automation", "Optical System Design", "Computational Material Science", "Machine Learning"]
+            },
+            experience: [
+                {
+                    role: "Teaching Assistant for Intro to Programming (MECH1100)",
+                    company: "University of Colorado",
+                    date: "August 2024 - Present",
+                    skills: ["Python", "C"],
+                    description: [
+                        "Taught independent weekly recitations, providing students with hands-on support for fundamental programming concepts.",
+                        "Provided comprehensive support to students during office hours, helping them debug code and understand core course material.",
+                        "Evaluated and graded weekly assignments for a class of 50+ students, providing detailed and constructive feedback."
+                    ]
+                },
+                {
+                    role: "SCAPS Recreation of Tandem Solar Cells",
+                    company: "Bowling Green State University",
+                    date: "August 2023 - December 2023",
+                    skills: ["SCAPS"],
+                    description: [
+                        "Modeled and simulated solar cell performance using SCAPS software, successfully replicating published results and analyzing material properties to enhance efficiency.",
+                        "Enhanced device structures and reduced energy losses, achieving computational results for tandem solar cells with an efficiency of over 41%."
+                    ]
+                },
+                {
+                    role: "Science Undergraduate Laboratory Internship (SULI)",
+                    company: "Los Alamos National Laboratory",
+                    date: "August 2022 - December 2022",
+                    skills: ["Optical System Design"],
+                    description: [
+                        "Collaborated with a team of three to design and develop a $70,000 optical system that enhanced data analysis for experimental research on material properties.",
+                        "Led weekly team meetings to troubleshoot and resolve technical issues with research apparatus, ensuring smooth and efficient operations.",
+                        "Engaged in weekly seminars and workshops, staying current with advanced optics and engineering methodologies."
+                    ]
+                },
+                 {
+                    role: "Numerical Simulation of Time-Resolved Photoluminescence",
+                    company: "Bowling Green State University",
+                    date: "January 2022 - May 2022",
+                    skills: ["MatLab", "Python Data Automation"],
+                    description: [
+                        "Prepared theoretical data of single photon time-resolved photoluminescence in MatLab.",
+                        "Conducted error analysis using R-squared regression, comparing theoretical and experimental data."
+                    ]
+                },
+                {
+                    role: "Quantum Dot Research Assistant",
+                    company: "Bowling Green State University",
+                    date: "September 2021 - December 2021",
+                    skills: ["Spectroscopy"],
+                    description: [
+                        "Synthesized CdSe Quantum Dots in a controlled lab setting, performing spectroscopy to determine the emission spectrum of each batch.",
+                        "Categorized and documented the creation process of each batch and reported results to the supervisor."
+                    ]
+                },
+                 {
+                    role: "Research Experience Undergraduate (REU) Intern",
+                    company: "University Of Toledo",
+                    date: "May 2020 - August 2020",
+                    skills: ["LAMMPS", "Parallel Computing", "Computational Material Science"],
+                    description: [
+                        "Ran computational models of CdTe using LAMMPS on the Ohio Supercomputer to calculate theoretical minimum energy saddle points of atom interactions."
+                    ]
+                }
+            ],
+            projects: [
+                {
+                    category: "Oral Presentation",
+                    title: "In-Situ Casting of TiNb Alloys",
+                    event: "DOE-SULI, Los Alamos, NM (December 2022)"
+                },
+                {
+                    category: "Oral Presentation",
+                    title: "Activation barriers for the diffusion of Se interstitials in CdTe and CdSe",
+                    event: "NSF-REU, Toledo, OH (August 2020)"
+                },
+                 {
+                    category: "Poster",
+                    title: "Investigation of Tandem Solar Cells Using SCAPS",
+                    event: "Bowling Green, OH (December 2023)"
+                },
+                {
+                    category: "Poster",
+                    title: "Numerical Simulation of Time-Resolved Photoluminescence",
+                    event: "CURS, Bowling Green, OH (May 2022)"
+                },
+                 {
+                    category: "Award",
+                    title: "J. Robert and Gretchen Overman Scholarship",
+                    event: "$800 - Bowling Green State University"
+                },
+                {
+                    category: "Award",
+                    title: "Center for Undergraduate Research Grant (CURS)",
+                    event: "$200 - Bowling Green State University"
+                }
+            ],
+            education: [
+                {
+                    degree: "Master of Science in Mechanical Engineering",
+                    university: "University of Colorado, Denver, CO",
+                    date: "Expected May 2027"
+                },
+                {
+                    degree: "Bachelor of Science in Physics, Minor in General Science",
+                    university: "Bowling Green State University, Bowling Green, OH",
+                    date: "December 2023 (GPA: 3.61)"
+                }
+            ]
+        };
 
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
+        let activeSkill = null;
 
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    // Close mobile menu after clicking a link
-                    if (!mobileMenu.classList.contains('hidden')) {
-                         mobileMenu.classList.add('hidden');
-                    }
+        function renderSkills() {
+            const container = document.getElementById('skill-filters');
+            container.innerHTML = '';
+            
+            Object.entries(resumeData.skills).forEach(([category, skills]) => {
+                skills.forEach(skill => {
+                    const button = document.createElement('button');
+                    button.textContent = skill;
+                    button.className = 'skill-btn bg-white shadow-sm border border-gray-200 rounded-full px-4 py-2 text-sm font-medium text-gray-700 hover:bg-blue-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500';
+                    button.dataset.skill = skill;
+                    button.addEventListener('click', () => toggleSkillFilter(skill, button));
+                    container.appendChild(button);
                 });
             });
-        });
-    </script>
+        }
+        
+        function renderExperience() {
+            const container = document.getElementById('experience-timeline');
+            container.innerHTML = '<div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-2 bottom-2 timeline-connector"></div>';
+            resumeData.experience.forEach(item => {
+                const skillsString = item.skills.join(',');
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item mb-8';
+                timelineItem.dataset.skills = skillsString;
 
+                const contentHtml = `
+                    <div class="relative pl-10 md:pl-0">
+                         <div class="absolute top-1 left-0 md:left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                            <div class="timeline-dot rounded-full"></div>
+                        </div>
+                        <div class="md:ml-[55%] bg-white p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer hover:border-blue-500 transition-colors" onclick="toggleExperienceDetails(this.parentElement)">
+                            <p class="text-xs text-blue-600 font-semibold">${item.date}</p>
+                            <h3 class="font-bold text-lg">${item.role}</h3>
+                            <p class="text-gray-600 font-medium mb-3">${item.company}</p>
+                            <div class="timeline-details">
+                                <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
+                                    ${item.description.map(d => `<li>${d}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                const contentHtmlAlt = `
+                    <div class="relative pl-10 md:pl-0">
+                        <div class="absolute top-1 left-0 md:left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                            <div class="timeline-dot rounded-full"></div>
+                        </div>
+                        <div class="md:mr-[55%] bg-white p-6 rounded-lg shadow-md border border-gray-200 cursor-pointer hover:border-blue-500 transition-colors" onclick="toggleExperienceDetails(this.parentElement)">
+                             <p class="text-xs text-blue-600 font-semibold">${item.date}</p>
+                            <h3 class="font-bold text-lg">${item.role}</h3>
+                            <p class="text-gray-600 font-medium mb-3">${item.company}</p>
+                            <div class="timeline-details">
+                                <ul class="list-disc pl-5 space-y-2 text-gray-600 text-sm">
+                                    ${item.description.map(d => `<li>${d}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                 timelineItem.innerHTML = resumeData.experience.indexOf(item) % 2 === 0 ? contentHtml : contentHtmlAlt;
+                container.appendChild(timelineItem);
+            });
+        }
+        
+        function renderProjects() {
+            const container = document.getElementById('projects-grid');
+            container.innerHTML = '';
+            resumeData.projects.forEach(project => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md border border-gray-200';
+                card.innerHTML = `
+                    <p class="text-sm font-semibold text-blue-600 mb-1">${project.category}</p>
+                    <h3 class="font-bold text-lg mb-2">${project.title}</h3>
+                    <p class="text-gray-600 text-sm">${project.event}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderEducation() {
+            const container = document.getElementById('education-list');
+            container.innerHTML = '';
+            resumeData.education.forEach(edu => {
+                const card = document.createElement('div');
+                card.className = 'bg-white p-6 rounded-lg shadow-md border border-gray-200';
+                card.innerHTML = `
+                    <h3 class="font-bold text-xl">${edu.degree}</h3>
+                    <p class="text-gray-600 font-medium">${edu.university}</p>
+                    <p class="text-sm text-gray-500">${edu.date}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleSkillFilter(skill, button) {
+            if (activeSkill === skill) {
+                activeSkill = null;
+                button.classList.remove('active');
+            } else {
+                activeSkill = skill;
+                document.querySelectorAll('.skill-btn.active').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            }
+            filterExperience();
+        }
+
+        function filterExperience() {
+            const items = document.querySelectorAll('#experience-timeline .timeline-item');
+            items.forEach(item => {
+                const itemSkills = item.dataset.skills.split(',');
+                if (!activeSkill || itemSkills.includes(activeSkill)) {
+                    item.classList.remove('hidden-skill');
+                } else {
+                    item.classList.add('hidden-skill');
+                }
+            });
+        }
+
+        function toggleExperienceDetails(element) {
+            const item = element.closest('.timeline-item');
+            item.classList.toggle('open');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSkills();
+            renderExperience();
+            renderProjects();
+            renderEducation();
+        });
+
+    </script>
 </body>
 </html>
+
 
