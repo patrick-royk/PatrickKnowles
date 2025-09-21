@@ -36,13 +36,16 @@
             max-height: 0;
             transform: scaleY(0);
         }
+        .timeline-item.open {
+            max-height: 800px;
+        }
         .timeline-details {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease-in-out;
         }
         .timeline-item.open .timeline-details {
-            max-height: 500px;
+            max-height: 800px;
         }
         .timeline-connector {
             width: 2px;
@@ -376,5 +379,4 @@
     </script>
 </body>
 </html>
-
-
+ 
